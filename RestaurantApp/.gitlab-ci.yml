@@ -1,8 +1,13 @@
-image: node:14
+image: node:14.15.3
 stages:
     - test
     - docker
     - deploy
+
+berofe_script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gen install dpl
 
 test:
     stage: test
@@ -23,7 +28,8 @@ docker:
 
 deploy:
     stage: deploy
+    image: ruby:latest
     script:
-        - npm install
+        - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY
     only:
         - master
