@@ -7,7 +7,7 @@ stages:
 before_script:
   - apt-get update -qy
   - apt-get install -y ruby-dev
-  - gen install dpl
+  - gem install dpl
 
 test:
   stage: test
